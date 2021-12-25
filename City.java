@@ -12,20 +12,13 @@ public class City {
 		this.y = y;
 		listCity.add(this);
 	}
-	
-	public double getX(){
-		return x;
-	}
-	
-	public double getY(){
-		return y;
-	}
-	
-	public void setCoord(double x, double y) {
+	public void setX(double x) {
 		this.x = x;
+	}
+	
+	public void setY(double y) {
 		this.y = y;
 	}
-	
 	
 	public double distance(City v) {
 		return Math.sqrt((this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y));
@@ -43,6 +36,11 @@ public class City {
 	public Object clone() {
 		City c = new City(this.x, this.y);
 		return c;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + x + "," + y + ")";
 	}
 	
 }

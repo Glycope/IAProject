@@ -13,7 +13,7 @@ public class State {
 		this.v = v;
 		this.costAction = costAction;
 		this.parent = parent;
-		this.h = heuristic(v);
+		this.h = v.heuristic();
 		this.id = nbVisit++;
 	}
 	
@@ -33,38 +33,6 @@ public class State {
 		return succ;
 	}
 	
-	public double heuristic(Visit v) {
-		ArrayList<City> lcity = new ArrayList<City>(v.getNV());
-		ArrayList<City> prim = new ArrayList<City>();
-		prim.add(v.getC());
-		double somme = 0;
-		while(!lcity.isEmpty()) {
-			double min;
-			int imin = 0;
-			boolean firstCity;
-			if (lcity.get(0).equals(City.listCity.get(0))) {
-				min = prim.get(0).distance(lcity.get(1));
-				firstCity = true;
-			}
-			else {
-				min = prim.get(0).distance(lcity.get(0));
-				firstCity = false;
-			}
-			for (int i = 0; i < prim.size(); i++) {
-				for (int j = 0; j < lcity.size(); j++) {
-					double d = prim.get(i).distance(lcity.get(j));
-					if (d < min && !(i == 0 && j == 0 && firstCity)) {
-						min = d;
-						imin = j;
-					}
-				}
-			}
-			prim.add(lcity.get(imin));
-			lcity.remove(imin);
-			somme += min;
-		}
-		return somme;
-	}
 	
 	public double evaluate() {
 		return this.h + this.costAction;
@@ -78,7 +46,7 @@ public class State {
 		int i = 0;
 		while (!explored.get(explored.size() - 1).v.isSolved()) {
 			if (i >= explored.size())
-				throw new ArrayIndexOutOfBoundsException();
+				throw new ArrayIndexOutOfBoundsException("Le programme ne trouve pas de solution");
 			succ.addAll(explored.get(i).expand());
 			State minState = explored.get(i);
 			double minf = minState.evaluate();
@@ -91,6 +59,7 @@ public class State {
 			}
 			explored.add(minState);
 			succ.remove(minState);
+			i++;
 		}
 		
 		ArrayList<State> solution = new ArrayList<State>();
