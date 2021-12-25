@@ -13,6 +13,20 @@ public class City {
 		listCity.add(this);
 	}
 	
+	public double getX(){
+		return x;
+	}
+	
+	public double getY(){
+		return y;
+	}
+	
+	public void setCoord(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	
 	public double distance(City v) {
 		return Math.sqrt((this.x - v.x)*(this.x - v.x) + (this.y - v.y)*(this.y - v.y));
 	}
