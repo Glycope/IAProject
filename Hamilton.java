@@ -6,7 +6,7 @@ public class Hamilton { //pour la partie 2
 	
 	private ArrayList<City> cycle = new ArrayList<City>();
 	
-	public Hamilton(City v) { //prend un point de départ
+	public Hamilton(City v) { //prend un point de dÃ©part
 		this.cycle.add(v);
 	}
 	
@@ -33,6 +33,10 @@ public class Hamilton { //pour la partie 2
 		poids += City.listCity.get(s-1).distance(City.listCity.get(0));
 		
 		return poids;
+	}
+	
+	public ArrayList<City> getCycle(){
+		return this.cycle;
 	}
 	
 }
