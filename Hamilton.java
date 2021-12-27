@@ -29,11 +29,11 @@ public class Hamilton { //pour la partie 2
 	
 	public double weight() { //heuristique?
 		double poids = 0;
-		int s = City.listCity.size();
+		int s = this.cycle.size();
 		for(int i = 0; i < s-1; i++) {
-			poids += City.listCity.get(i).distance(City.listCity.get(i+1));
+			poids += this.cycle.get(i).distance(this.cycle.get(i+1));
 		}
-		poids += City.listCity.get(s-1).distance(City.listCity.get(0));
+		poids += this.cycle.get(s-1).distance(this.cycle.get(0));
 		
 		return poids;
 	}
@@ -58,6 +58,19 @@ public class Hamilton { //pour la partie 2
 		}
 	}
 	
-	
-	
+	public Hamilton hillClim() {
+		Hamilton bestHam = this;
+		for(int i = 0; i < this.lVoisinage.size(); i++) {
+			if(this.lVoisinage.get(i).weight() <= bestHam.weight()) {
+				bestHam = this.lVoisinage.get(i);
+			}
+		}
+		if(bestHam == this) {
+			return bestHam;
+		} else {
+			System.out.println("test");
+			bestHam.genNeighboor();
+			return bestHam.hillClim();
+		}
+	}
 }
