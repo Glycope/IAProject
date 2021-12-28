@@ -17,11 +17,27 @@ public class State {
 		this.id = nbVisit++;
 	}
 	
+	public Visit getV() {
+		return this.v;
+	}
+	
+	public State getP() {
+		return this.parent;
+	}
+	
+	public double getH() {
+		return this.h;
+	}
+	
+	public double getCA() {
+		return this.costAction;
+	}
+	
 	public int getId() {
 		return id;
 	}
 	
-	public ArrayList<State> expand() {
+	/*public ArrayList<State> expand() {
 		ArrayList<State> succ = new ArrayList<State>();
 		for (City c : this.v.getNV()) {
 			Visit v = (Visit) this.v.clone();
@@ -29,7 +45,21 @@ public class State {
 			if (v != null) {
 				succ.add(new State(v, this, this.costAction + c.distance(this.v.getC())));
 			}
+			
 		}
+		//System.out.println(succ);
+		return succ;
+	}*/
+	
+	public ArrayList<State> expand() {
+		ArrayList<State> succ = new ArrayList<State>();
+		for (City c : this.v.getNV()) {
+			Visit v = (Visit) this.v.clone();
+			v.goTo(c);
+			if (!(this.v.getNV().size() != 1 && c.equals(City.listCity.get(0))) && this.v.getNV().contains(c) && !this.v.getC().equals(c))
+				succ.add(new State(v, this, this.costAction + c.distance(this.v.getC())));
+		}
+		//System.out.println(succ);
 		return succ;
 	}
 	
@@ -42,24 +72,26 @@ public class State {
 		ArrayList<State> explored = new ArrayList<State>();
 		ArrayList<State> succ = new ArrayList<State>();
 		explored.add(new State(new Visit(City.listCity.get(0),City.listCity), null, 0));
-		
 		int i = 0;
 		while (!explored.get(explored.size() - 1).v.isSolved()) {
+			
 			if (i >= explored.size())
 				throw new ArrayIndexOutOfBoundsException("Le programme ne trouve pas de solution");
 			succ.addAll(explored.get(i).expand());
-			State minState = explored.get(i);
+			
+			State minState = succ.get(0);
 			double minf = minState.evaluate();
 			for (int j = 0; j < succ.size(); j++) {
 				double f = succ.get(j).evaluate();
 				if (f < minf) {
-					minState = explored.get(j);
+					minState = succ.get(j);
 					minf = f;
 				}
 			}
 			explored.add(minState);
 			succ.remove(minState);
 			i++;
+			
 		}
 		
 		ArrayList<State> solution = new ArrayList<State>();
@@ -68,6 +100,25 @@ public class State {
 			solution.add(0,solution.get(0).parent);
 		}
 		return solution;
+	}
+	
+	@Override
+	public String toString() {
+		String s = this.v.toString();
+		s += " g(n) = " + this.costAction + ", h(n) = " + this.h + "\n";
+		return s;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof State))
+			return false;
+		boolean res = this.v.equals(((State) o).v) && this.costAction == ((State) o).costAction && this.h == ((State) o).h;
+		if (this.parent == null && ((State) o).parent == null)
+			return (true && res);
+		else if ((this.parent == null && ((State) o).parent != null) || (this.parent != null && ((State) o).parent == null))
+			return false;
+		return (this.parent.equals(((State) o).parent) && res);
 	}
 	
 }

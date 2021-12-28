@@ -12,6 +12,18 @@ public class City {
 		this.y = y;
 		listCity.add(this);
 	}
+	
+	public City() {
+	}
+	
+	public double getX() {
+		return this.x;
+	}
+	
+	public double getY() {
+		return this.y;
+	}
+	
 	public void setX(double x) {
 		this.x = x;
 	}
@@ -34,7 +46,9 @@ public class City {
 	
 	@Override
 	public Object clone() {
-		City c = new City(this.x, this.y);
+		City c = new City();
+		c.x = this.x;
+		c.y = this.y;
 		return c;
 	}
 	

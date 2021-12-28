@@ -25,12 +25,17 @@ public class Visit {
 		return this.nonVisited;
 	}
 	
-	public Visit goTo(City c) {
+	/*public Visit goTo(City c) {
 		if ((this.nonVisited.size() != 1 && c.equals(City.listCity.get(0))) || !this.nonVisited.contains(c) || this.c.equals(c))
 			return null;
 		ArrayList<City> nonVisited = new ArrayList<City>(this.nonVisited);
 		nonVisited.remove(c);
 		return new Visit(c, nonVisited);
+	}*/
+	
+	public void goTo(City c) {
+		this.c = c;
+		this.nonVisited.remove(c);
 	}
 	
 	public boolean isSolved() {
@@ -39,9 +44,11 @@ public class Visit {
 	
 	public double heuristic() {
 		ArrayList<City> lcity = new ArrayList<City>(this.nonVisited);
+		if (lcity.isEmpty())
+			return 0;
 		ArrayList<City> prim = new ArrayList<City>();
 		prim.add(this.c);
-		if (lcity.get(0).equals(City.listCity.get(0)))
+		if (prim.get(0).equals(City.listCity.get(0)))
 			lcity.remove(0);
 		double somme = 0;
 		while(!lcity.isEmpty()) {
@@ -70,7 +77,7 @@ public class Visit {
 		return copy;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		String s = this.c.toString() + " {";
 		for (City c : this.nonVisited) {
@@ -80,6 +87,20 @@ public class Visit {
 			s = s.substring(0,s.length() - 2);
 		s += "}";
 		return s;
+	}*/
+	
+	@Override
+	public String toString() {
+		String s = this.c.toString();
+		s += " " + this.nonVisited.toString();
+		return s;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof Visit))
+			return false;
+		return (this.c.equals(((Visit) o).c) && this.nonVisited.equals(((Visit) o).nonVisited));
 	}
 	
 }
