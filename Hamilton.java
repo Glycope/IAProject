@@ -5,12 +5,13 @@ import java.util.Collections;
 
 public class Hamilton { //pour la partie 2
 
-	
+	private City villeDepart;
 	private ArrayList<City> cycle = new ArrayList<City>();
 	private ArrayList<Hamilton> lVoisinage = new ArrayList<Hamilton>();
 	
 	public Hamilton(City v) { //prend un point de départ
-		this.cycle.add(v);
+		this.villeDepart = v;
+		this.generate();
 	}
 	
 	public void generate() { //genere un cycle hamiltonien initial (random)
@@ -22,7 +23,6 @@ public class Hamilton { //pour la partie 2
 			while(cycle.contains(City.listCity.get(j))) {
 				j = random.nextInt(s);
 			}
-			
 			cycle.add(City.listCity.get(j));
 		} // C'est l'ordre qui définit le cycle
 	}
@@ -30,10 +30,10 @@ public class Hamilton { //pour la partie 2
 	public double weight() { //heuristique?
 		double poids = 0;
 		int s = this.cycle.size();
-		for(int i = 0; i < s-1; i++) {
+		for(int i = 1; i < s-1; i++) {
 			poids += this.cycle.get(i).distance(this.cycle.get(i+1));
 		}
-		poids += this.cycle.get(s-1).distance(this.cycle.get(0));
+		poids += this.cycle.get(s-1).distance(this.villeDepart);
 		
 		return poids;
 	}
@@ -46,31 +46,20 @@ public class Hamilton { //pour la partie 2
 		return this.lVoisinage;
 	}
 	
-	public void genNeighboor() {
-		for(int i = 1; i < this.cycle.size(); i++) {
-			for(int j = i+1; j < this.cycle.size(); j++) {
-				ArrayList<City> list = new ArrayList<City>(this.cycle);
-				Collections.swap(list, i, j);	
-				Hamilton ham = new Hamilton(this.cycle.get(0));
-				ham.cycle = list;
-				this.lVoisinage.add(ham);
-			}
-		}
+	public City getfCity() {
+		return this.villeDepart;
 	}
 	
-	public Hamilton hillClim() {
-		Hamilton bestHam = this;
-		for(int i = 0; i < this.lVoisinage.size(); i++) {
-			if(this.lVoisinage.get(i).weight() <= bestHam.weight()) {
-				bestHam = this.lVoisinage.get(i);
-			}
-		}
-		if(bestHam == this) {
-			return bestHam;
-		} else {
-			System.out.println("test");
-			bestHam.genNeighboor();
-			return bestHam.hillClim();
-		}
+	public void setCycle(ArrayList<City> l) {
+		this.cycle = l;
 	}
+	
+	public Hamilton go() {
+		hamNeighboor best = new hamNeighboor(this);
+		
+		Hamilton u = best.hillClim();
+		
+		return u;
+	}
+	
 }
