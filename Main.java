@@ -11,10 +11,9 @@ public class Main {
 		int y = scan.nextInt();
 		int n = scan.nextInt();
 	
-		Generation.randomGeneration(x, y,n);
+		Generation.randomGeneration(x,y,n);
 	
 		for(int i = 0; i < City.listCity.size(); i++) {
-		
 			System.out.println(City.listCity.get(i).getX());
 			System.out.println(City.listCity.get(i).getY());
 			System.out.println("\n");
@@ -27,17 +26,15 @@ public class Main {
 		System.out.println(test.weight());
 		System.out.println(test.getCycle() + "\n");
 		
-		test.genNeighboor();
 		long startTime = System.nanoTime();
-	
-		Hamilton u = test.hillClim();
+		Hamilton u = test.go();
 		long endTime = System.nanoTime();
 
 		long duration = (endTime - startTime); 
 		System.out.println(u.getCycle());
-		System.out.println(u.weight());
-		System.out.println(duration/1000000 + "ms"); //to ms
-		
+		System.out.println(u.getWeight());
+		System.out.println(hamNeighboor.ite);
+		System.out.println(duration/1000000 + "ms"); //to ms 
 	}
 	
 }
