@@ -9,6 +9,7 @@ public class Hamilton { //pour la partie 2
 	private ArrayList<City> cycle = new ArrayList<City>();
 	private ArrayList<Hamilton> lVoisinage = new ArrayList<Hamilton>();
 	private double weight = 0;
+
 	
 	public Hamilton(City v) { //prend un point de d�part
 		this.villeDepart = v;
@@ -70,6 +71,7 @@ public class Hamilton { //pour la partie 2
 		hamNeighboor best = new hamNeighboor(this);
 		
 		Hamilton u = best.hillClim();
+		
 		
 		return u;
 	}
