@@ -6,15 +6,18 @@ public class hamNeighboor {
 	private Hamilton state;
 	private ArrayList<Hamilton> lVoisinage = new ArrayList<Hamilton>();
 	private static ArrayList<City> list;
-
+	public static int ite = 0;
 
 	public hamNeighboor(Hamilton s) {
 		this.state = s;
-		for(int i = 0; i < s.getCycle().size(); i++) {
+		for(int i = 0; i < s.getCycle().size(); i++) { 
 			for(int j = i+1; j < s.getCycle().size(); j++) {
+				ite++;
+				
 				list = new ArrayList<City>(s.getCycle());   
 				Collections.swap(list, i, j);	
 				Hamilton ham = new Hamilton(s.getfCity());
+				ham.setCycle(list);
 				this.lVoisinage.add(ham);
 				list = null;
 				//this.TwoSwap(i, j);
@@ -24,6 +27,7 @@ public class hamNeighboor {
 	
 	//fonction useless
 	public void TwoSwap(int i, int j) {
+		
 		Hamilton ham = new Hamilton(this.state.getfCity());
 		list = new ArrayList<City>();
 		list.addAll(this.state.getCycle().subList(0, i));
@@ -35,6 +39,7 @@ public class hamNeighboor {
 		//System.out.println(list);
 		this.lVoisinage.add(ham);
 		list = null;
+
 	}
 	
 	public Hamilton getState() {
@@ -46,26 +51,25 @@ public class hamNeighboor {
 	}
 	
 	public Hamilton hillClim() {
-		hamNeighboor current = this;
+		
 		hamNeighboor bestHam = this;
 		Hamilton best = this.state;
 		Boolean found = false;
 		for(int i = 0; i < this.lVoisinage.size(); i++) {
-			if(this.lVoisinage.get(i).getWeight() <= best.getWeight()) {
+			if(this.lVoisinage.get(i).getWeight() < best.getWeight()) {
 				found = true;
 				best = this.lVoisinage.get(i);	
 			}
 		}
 		
 		if(found) {
+			bestHam = null;
 			bestHam = new hamNeighboor(best);
-		}
-		if(bestHam == current) {
-			return bestHam.state;
-		} else {
-			current = null;
-			//System.out.println("tets");
+			//System.out.println("test");
 			return bestHam.hillClim();
 		}
+		
+		return bestHam.state;
 	}
+	
 }
