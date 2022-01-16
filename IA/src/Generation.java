@@ -9,13 +9,14 @@ public static void randomGeneration (int x, int y, int n){  //x max en abscisse,
 		
 		Random random = new Random();
 		int yAlea, xAlea = 0;
+		City.listCity = new ArrayList<City>();
 		
-		for(int i = 0; i < n; i++) {
+		for(int i = 0; i < n; i++) { //genere aleatoirement X et Y 
 			yAlea = random.nextInt(y);
 			xAlea = random.nextInt(x);
-			City ville = new City(xAlea, yAlea);
+			City ville = new City(xAlea, yAlea); //place une ville sur les coordonnées
 			
-			while(listVille.contains(ville)) { //peut etre gourmand
+			while(listVille.contains(ville)) { //Recommence si cette ville existe déjà
 				yAlea = random.nextInt(y);
 				xAlea = random.nextInt(x);
 				ville.setX(xAlea);
