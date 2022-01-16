@@ -62,8 +62,7 @@ public class Main {
 	        long duration3 = (endTime3 - startTime3);
 			
 	        mLocal += duration3/1000000;
-	        System.out.println(beamStates.get(beamStates.size() - 1).getCA() - astarStates.get(astarStates.size() - 1).getCA()/beamStates.get(beamStates.size() - 1).getCA());
-			mLocal2 += beamStates.get(beamStates.size() - 1).getCA() - astarStates.get(astarStates.size() - 1).getCA()/beamStates.get(beamStates.size() - 1).getCA();
+			mLocal2 += (beamStates.get(beamStates.size() - 1).getCA() - astarStates.get(astarStates.size() - 1).getCA())/beamStates.get(beamStates.size() - 1).getCA();
 			
 			
 		}
