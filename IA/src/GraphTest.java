@@ -81,7 +81,7 @@ public class GraphTest {
 	
 	@Test
 	public void testAStar() {
-		ArrayList<State> solution0 = State.AStar();
+		ArrayList<State> solution0 = AStar.algo_AStar();
 		System.out.println(solution0);
 		ArrayList<State> solution1 = new ArrayList<State>();
 		assertEquals(solution0,solution1);

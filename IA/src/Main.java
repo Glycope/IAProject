@@ -15,12 +15,12 @@ public class Main {
         new City(16,13);
         new City(11,1);
         new City(3,0);
-        new City(3,4);
+        /*new City(3,4);
         new City(4,6);
         new City(3,9);
         new City(5,11);
         new City(8,8);
-        new City(16,17);
+        new City(16,17);*/
 	
 		for(int i = 0; i < City.listCity.size(); i++) {
 			System.out.println(City.listCity.get(i).getX());
@@ -46,14 +46,14 @@ public class Main {
 		System.out.println(duration2/1000000 + "ms"); //to ms 
 		
 		/*long startTime1 = System.nanoTime();
-		ArrayList<State> biteErection = State.AStar();
+		ArrayList<State> biteErection = AStar.algo_AStar();
 		long endTime1 = System.nanoTime();
 		long duration1 = (endTime1 - startTime1);
 		System.out.println(biteErection.get(biteErection.size() - 1).getCA());
 		System.out.println(duration1/1000000 + "ms");
 		System.out.println(biteErection);*/
 		
-		System.out.println(State.LocaLBeamSearchAlgo(3));
+		System.out.println(LocalBeamSearch.algo_LocaLBeamSearch(3));
 		
 		
 	}
