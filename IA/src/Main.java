@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-
-	public class Main {
 	
 	public static void test(int k, int n, int x, int y) {
 		
@@ -155,4 +153,4 @@ System.out.println("HILL CLIMBING SEARCH");
 	
 }
 	
-}
+
