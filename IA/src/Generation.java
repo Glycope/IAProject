@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class Generation {
 public static void randomGeneration (int x, int y, int n){  //x max en abscisse, y max en ordonnée, n nombre de villes
-		
+		City.listCity = new ArrayList<City>();
 		final ArrayList<City> listVille = new ArrayList<City>();
 		
 		Random random = new Random();
 		int yAlea, xAlea = 0;
-		City.listCity = new ArrayList<City>();
 		
 		for(int i = 0; i < n; i++) { //genere aleatoirement X et Y 
 			yAlea = random.nextInt(y);
