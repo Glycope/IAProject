@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class State {
@@ -39,20 +38,10 @@ public class State {
 		return id;
 	}
 	
-	/*public ArrayList<State> expand() {
-		ArrayList<State> succ = new ArrayList<State>();
-		for (City c : this.v.getNV()) {
-			Visit v = (Visit) this.v.clone();
-			v = v.goTo(c);
-			if (v != null) {
-				succ.add(new State(v, this, this.costAction + c.distance(this.v.getC())));
-			}
-			
-		}
-		//System.out.println(succ);
-		return succ;
-	}*/
-	
+	/* 
+	 * expand() 
+	 * retourne l'ensemble des voisins successeurs de l'etat occurent
+	*/
 	public ArrayList<State> expand() {
 		ArrayList<State> succ = new ArrayList<State>();
 		for (City c : this.v.getNV()) {
@@ -61,11 +50,13 @@ public class State {
 			if (!(this.v.getNV().size() != 1 && c.equals(City.listCity.get(0))) && this.v.getNV().contains(c) && !this.v.getC().equals(c))
 				succ.add(new State(v, this, this.costAction + c.distance(this.v.getC())));
 		}
-		//System.out.println(succ);
 		return succ;
 	}
 	
-	
+	/* 
+	 * evaluate 
+	 * retourne l'évaluation f(n) = h(n) + g(n) vu en cours
+	*/
 	public double evaluate() {
 		return this.h + this.costAction;
 	}
@@ -101,6 +92,9 @@ public class State {
 		return (this.parent.equals(((State) o).parent) && res);
 	}
 	
+	
+	// Classe interne qui sert a comparer deux état en fonction de leur evaluation f(n)
+	// utile pour les methodes Collections.sort() du LocalBeamSearch et Collections.min du A*
 	static class StateComparator implements Comparator<State> {
 		@Override
 		public int compare(State s1, State s2) {
