@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Hamilton { //pour la partie 2
 
-	private City villeDepart;
+	private City villeDepart; //prend la ville de depart
 	private ArrayList<City> cycle = new ArrayList<City>();
 	private double weight = 0;
 
@@ -14,7 +14,7 @@ public class Hamilton { //pour la partie 2
 		this.villeDepart = v;
 	}
 	
-	public void generate() { //genere un cycle hamiltonien initial (random)
+	public void generate() { //genere un cycle hamiltonien initial, utilise que pour le premier cycle
 		Random random = new Random();
 		ArrayList<City> villes = new ArrayList<City>(City.listCity);
 		villes.remove(0);
@@ -31,7 +31,7 @@ public class Hamilton { //pour la partie 2
 	}
 	
 	
-	public double weight() { //heuristique?
+	public double weight() { //Calcul la distance entre chaque ville (dont celle de depart)
 		double poids = 0;
 		int s = this.cycle.size();
 		for(int i = 0; i < s-1; i++) {
@@ -65,10 +65,8 @@ public class Hamilton { //pour la partie 2
 	}
 	
 	public Hamilton go() {
-		hamNeighboor best = new hamNeighboor(this);
-		
-		Hamilton u = best.hillClim();
-		
+		hamNeighboor best = new hamNeighboor(this); //Créer les voisins 
+		Hamilton u = best.hillClim(); //Puis applique hill climbing dessus
 		
 		return u;
 	}
