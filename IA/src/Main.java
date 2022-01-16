@@ -25,6 +25,7 @@ public class Main {
 			long startTime1 = System.nanoTime();
 			System.out.println("L'algorithme A* : ");
 	        ArrayList<State> astarStates = AStar.algo_AStar();
+	        // on affiche la solution si le nombre de testes est inférieur à 5
 	        if (k < 5){
 	        	System.out.println(astarStates);
 	        }
@@ -32,12 +33,13 @@ public class Main {
 	        long duration1 = (endTime1 - startTime1);
 	        mAstar += duration1/1000000;
 			
-	        //Hill climbing
+	        //HILL CLIMBING
 			Hamilton test = new Hamilton(City.listCity.get(0));
 			test.generate();
 			long startTime2 = System.nanoTime();
 			System.out.println("L'algorithme HillClimbing : ");
 			Hamilton u = test.go();
+			// on affiche la solution si le nombre de testes est inférieur à 5
 			if (k < 5){
 				System.out.println(u.getCycle());
 				System.out.println(u.getWeight());
@@ -51,11 +53,12 @@ public class Main {
 			mHam2 += duration2/1000000;
 			mHam3 += rate2;
 			
-			//Local Beam 
+			//LOCAL BEAM 
 			long startTime3 = System.nanoTime();
 			System.out.println("L'algorithme LocalBeamSearch : ");
 	        ArrayList<State> beamStates = LocalBeamSearch.algo_LocaLBeamSearch(kbeam);
 	        long endTime3 = System.nanoTime();
+	        // on affiche la solution si le nombre de testes est inférieur à 5
 	        if (k < 5){
 	        	System.out.println(beamStates);
 	        }
