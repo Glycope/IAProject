@@ -1,5 +1,5 @@
 # Projet final d'Intelligence Artificielle
-## Auteurs : Alexis HUMMEL, Izabell ISKANDAR, Salim ZERHOUNI ABDOU
+## Auteurs : Alexis HUMMEL, Izabell ISKANDAR, Salim ZERHOUNI
 
 MODE D'UTILISATION :
 1. Télécharger le dossier IA sur votre machine.
