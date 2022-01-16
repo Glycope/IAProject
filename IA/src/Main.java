@@ -7,11 +7,11 @@ public class Main {
 	public static void main(String args[]) {
 		Scanner scan = new Scanner(System.in);
 	
-		//int x = scan.nextInt();
-		//int y = scan.nextInt();
-		//int n = scan.nextInt();
-		//Generation.randomGeneration(x,y,n);
-        new City(19,18);
+		int x = scan.nextInt();
+		int y = scan.nextInt();
+		int n = scan.nextInt();
+		Generation.randomGeneration(x,y,n);
+        /*new City(19,18);
         new City(16,13);
         new City(11,1);
         new City(3,0);
@@ -20,7 +20,7 @@ public class Main {
         new City(3,9);
         new City(5,11);
         new City(8,8);
-        new City(16,17);
+        new City(16,17);*/
 	
 		/*for(int i = 0; i < City.listCity.size(); i++) {
 			System.out.println(City.listCity.get(i).getX());
@@ -29,11 +29,9 @@ public class Main {
 		}*/
 	
 		scan.close();
-		
+		System.out.println("HILL CLIMBING SEARCH");
 		Hamilton test = new Hamilton(City.listCity.get(0));
 		test.generate();
-		//System.out.println(test.weight());
-		//System.out.println(test.getCycle() + "\n");
 		
 		long startTime2 = System.nanoTime();
 		Hamilton u = test.go();
@@ -45,6 +43,16 @@ public class Main {
 		System.out.println(hamNeighboor.ite);
 		System.out.println(duration2/1000000 + "ms"); //to ms 
 		
+		System.out.println("LOCAL BEAM SEARCH");
+		long startTime3 = System.nanoTime();
+		ArrayList<State> beamStates = LocalBeamSearch.algo_LocaLBeamSearch(3);
+		long endTime3 = System.nanoTime();
+		long duration3 = (endTime3 - startTime3);
+		System.out.println(beamStates.get(beamStates.size() - 1).getCA());
+		System.out.println(duration3/1000000 + "ms");
+		System.out.println(beamStates);
+		
+		System.out.println("A*");
 		long startTime1 = System.nanoTime();
 		ArrayList<State> astarStates = AStar.algo_AStar();
 		long endTime1 = System.nanoTime();
@@ -54,13 +62,7 @@ public class Main {
 		System.out.println(astarStates);
 		
 		
-		long startTime3 = System.nanoTime();
-		ArrayList<State> beamStates = LocalBeamSearch.algo_LocaLBeamSearch(3);
-		long endTime3 = System.nanoTime();
-		long duration3 = (endTime3 - startTime3);
-		System.out.println(beamStates.get(beamStates.size() - 1).getCA());
-		System.out.println(duration3/1000000 + "ms");
-		System.out.println(beamStates);
+		
 		
 		
 	}

@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class LocalBeamSearch {
 
-public static ArrayList<State> algo_LocaLBeamSearch(int k) {
+	/*public static ArrayList<State> algo_LocaLBeamSearch(int k) {
         
         ArrayList<State> explored = new ArrayList<State>();
         
@@ -54,6 +55,57 @@ public static ArrayList<State> algo_LocaLBeamSearch(int k) {
                 succ.remove(Node);
             }
             i = explored.size() - k;
+        }
+        ArrayList<State> solution = new ArrayList<State>();
+        solution.add(explored.get(explored.size() - 1));
+        while (!solution.get(0).equals(explored.get(0))) {
+            solution.add(0,solution.get(0).getP());
+        }
+        return solution;
+    }*/
+	
+	public static ArrayList<State> algo_LocaLBeamSearch(int k) {
+		
+        ArrayList<State> explored = new ArrayList<State>();
+        /*Comparator<State> stateComparator = new Comparator<State>() {
+			@Override
+			public int compare(State s1, State s2) {
+				if (s1.evaluate() < s2.evaluate())
+					return -1;
+				else if (s1.evaluate() > s2.evaluate())
+					return 1;
+				else return 0;
+			}
+        };*/
+        
+        
+        
+        explored.add(new State(new Visit(City.listCity.get(0),City.listCity), null, 0));
+        int i = 0;
+        boolean Found = false;
+        while (!Found) {
+        	ArrayList<State> succ = new ArrayList<State>();
+            if (i >= explored.size())
+                throw new ArrayIndexOutOfBoundsException("Le programme ne trouve pas de solution");
+            for (int l = i; l < explored.size(); l++) {
+            	succ.addAll(explored.get(l).expand());
+            }
+            i = explored.size();
+            
+            // on trie les evaluations 
+            Collections.sort(succ, new State.StateComparator());
+            
+            
+            // on regarde les k premiers etats tries
+            for (int j = 0; j < Math.min(k,succ.size()); j++) {
+                State Node = succ.get(j);
+                explored.add(Node);
+                succ.remove(Node);
+                if (Node.getV().isSolved()){
+                    Found = true;
+                    break;
+                }
+            }
         }
         ArrayList<State> solution = new ArrayList<State>();
         solution.add(explored.get(explored.size() - 1));

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class State {
 	
@@ -98,6 +99,17 @@ public class State {
 		else if ((this.parent == null && ((State) o).parent != null) || (this.parent != null && ((State) o).parent == null))
 			return false;
 		return (this.parent.equals(((State) o).parent) && res);
+	}
+	
+	static class StateComparator implements Comparator<State> {
+		@Override
+		public int compare(State s1, State s2) {
+			if (s1.evaluate() < s2.evaluate())
+				return -1;
+			else if (s1.evaluate() > s2.evaluate())
+				return 1;
+			else return 0;
+		}
 	}
 	
 }
