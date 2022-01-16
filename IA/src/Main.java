@@ -76,9 +76,9 @@ public class Main {
 		mLocal = mLocal/k;//Temps d'exécution LocalBeamSearch
 		mLocal2 = mLocal2/k; //Taux d'améliration entre la solution de Astar et la solution de LocalBeamSearch
 		
-		System.out.println(" Temps d'exécution moyen de A* : " + mAstar);
-		System.out.println(" Temps d'exécution moyen de HillClim : " + mHam2);
-		System.out.println(" Temps d'exécution moyen de LocalBeamSearch : " + mLocal);
+		System.out.println(" Temps d'exécution moyen de A* : " + mAstar + " ms");
+		System.out.println(" Temps d'exécution moyen de HillClim : " + mHam2 + " ms");
+		System.out.println(" Temps d'exécution moyen de LocalBeamSearch : " + mLocal + " ms");
 		System.out.println("Taux d'améliration moyen entre la solution initiale et la solution finale de HillClim : " + mHam);
 		System.out.println("Taux d'améliration moyen entre la solution de Astar et la solution de HillClim : " + mHam3);
 		System.out.println("Taux d'écart moyen entre la solution de Astar et la solution de LocalBeamSearch : " + mLocal2);
