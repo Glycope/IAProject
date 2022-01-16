@@ -25,14 +25,6 @@ public class Visit {
 		return this.nonVisited;
 	}
 	
-	/*public Visit goTo(City c) {
-		if ((this.nonVisited.size() != 1 && c.equals(City.listCity.get(0))) || !this.nonVisited.contains(c) || this.c.equals(c))
-			return null;
-		ArrayList<City> nonVisited = new ArrayList<City>(this.nonVisited);
-		nonVisited.remove(c);
-		return new Visit(c, nonVisited);
-	}*/
-	
 	public void goTo(City c) {
 		this.c = c;
 		this.nonVisited.remove(c);

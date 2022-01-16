@@ -21,10 +21,13 @@ public class Hamilton { //pour la partie 2
 		int j = 0;
 		int s = City.listCity.size();
 		for(int i = 0; i < s-1; i++) {
-			//int u = villes.size();
-			//j = random.nextInt(u);
-			//cycle.add(villes.get(j));
-			//villes.remove(j);
+			// soit on fait ça
+			/*int u = villes.size();
+			*j = random.nextInt(u);
+			*cycle.add(villes.get(j));
+			*villes.remove(j);
+			*/ 
+			//soit on fait ça
 			cycle.add(villes.get(i)); // a enlever
 		} // C'est l'ordre qui definit le cycle
 		weight = weight();
