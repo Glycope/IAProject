@@ -91,9 +91,9 @@ public class Main {
 		int y = scan.nextInt();
 		System.out.println(" Entrez le nombre de villes à générer (restez raisonable) ");
 		int n = scan.nextInt();
-		System.out.println(" Entrez le nombre de tests à faire ");
+		System.out.println(" Entrez le nombre de testes à faire ");
 		int k = scan.nextInt();
-		System.out.println(" Entrez le nombre de villes pour l'Algorithme LocalBeamSearch ");
+		System.out.println(" Entrez le nombre d'états à considérer pour l'Algorithme LocalBeamSearch ");
 		int kbeam = scan.nextInt();
 		scan.close();
 		test(k, n, x, y, kbeam);
