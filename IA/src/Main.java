@@ -84,19 +84,25 @@ public class Main {
 	}
 
 	public static void main(String args[]) {
-		Scanner scan = new Scanner(System.in);
-		System.out.println(" Entrez la coordonnée d'abscisse maximale ");
-		int x = scan.nextInt();
-		System.out.println(" Entrez la coordonnée d'ordonnée maximale ");
-		int y = scan.nextInt();
-		System.out.println(" Entrez le nombre de villes à générer (restez raisonable) ");
-		int n = scan.nextInt();
-		System.out.println(" Entrez le nombre de testes à faire ");
-		int k = scan.nextInt();
-		System.out.println(" Entrez le nombre d'états à considérer pour l'Algorithme LocalBeamSearch ");
-		int kbeam = scan.nextInt();
-		scan.close();
-		test(k, n, x, y, kbeam);
+		try {
+			Scanner scan = new Scanner(System.in);
+			System.out.println(" Entrez la coordonnée d'abscisse maximale ");
+			int x = scan.nextInt();
+			System.out.println(" Entrez la coordonnée d'ordonnée maximale ");
+			int y = scan.nextInt();
+			System.out.println(" Entrez le nombre de villes à générer (restez raisonable) ");
+			int n = scan.nextInt();
+			System.out.println(" Entrez le nombre de testes à faire ");
+			int k = scan.nextInt();
+			System.out.println(" Entrez le nombre d'états à considérer pour l'Algorithme LocalBeamSearch ");
+			int kbeam = scan.nextInt();
+			scan.close();
+			test(k, n, x, y, kbeam);
+		}
+        catch (Exception e){
+            main(null);
+        }
+ 
 	}
 	
 }
