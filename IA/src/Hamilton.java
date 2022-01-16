@@ -10,7 +10,7 @@ public class Hamilton { //pour la partie 2
 	private double weight = 0;
 
 	
-	public Hamilton(City v) { //prend un point de d�part
+	public Hamilton(City v) { //prend un point de depart
 		this.villeDepart = v;
 	}
 	
@@ -26,7 +26,7 @@ public class Hamilton { //pour la partie 2
 			//cycle.add(villes.get(j));
 			//villes.remove(j);
 			cycle.add(villes.get(i)); // a enlever
-		} // C'est l'ordre qui d�finit le cycle
+		} // C'est l'ordre qui definit le cycle
 		weight = weight();
 	}
 	
