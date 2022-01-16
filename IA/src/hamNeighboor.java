@@ -3,44 +3,26 @@ import java.util.Collections;
 
 public class hamNeighboor {
 
-	private Hamilton state;
-	private ArrayList<Hamilton> lVoisinage = new ArrayList<Hamilton>();
-	private static ArrayList<City> list;
-	public static int ite = 0;
+	private Hamilton state; //Le cycle sur lequel on se situe 
+	private ArrayList<Hamilton> lVoisinage = new ArrayList<Hamilton>(); //Liste des autres cycles (voisins)
+	private static ArrayList<City> list; 
 
-	public hamNeighboor(Hamilton s) {
+	public hamNeighboor(Hamilton s) {  //Genere l'ensemble des possibilités pour un cycle donnés
 		this.state = s;
 		for(int i = 0; i < s.getCycle().size(); i++) { 
 			for(int j = i+1; j < s.getCycle().size(); j++) {
-				ite++;
 				
-				list = new ArrayList<City>(s.getCycle());   
-				Collections.swap(list, i, j);	
-				Hamilton ham = new Hamilton(s.getfCity());
+				list = new ArrayList<City>(s.getCycle());     
+				Collections.swap(list, i, j);	         //Echange les positions i,j du cycle, ce que correspond à changer deux arretes.
+				Hamilton ham = new Hamilton(s.getfCity()); 
 				ham.setCycle(list);
 				this.lVoisinage.add(ham);
 				list = null;
-				//this.TwoSwap(i, j);
+
 			}
 		}
 	}
 	
-	//fonction useless
-	public void TwoSwap(int i, int j) {
-		
-		Hamilton ham = new Hamilton(this.state.getfCity());
-		list = new ArrayList<City>();
-		list.addAll(this.state.getCycle().subList(0, i));
-		for(int k = i; k <= j; k++) {
-			list.add(this.state.getCycle().get(j-(k-i)));
-		}
-		list.addAll(this.state.getCycle().subList(j+1, this.state.getCycle().size()));
-		ham.setCycle(list);
-		//System.out.println(list);
-		this.lVoisinage.add(ham);
-		list = null;
-
-	}
 	
 	public Hamilton getState() {
 		return this.state;
@@ -50,9 +32,6 @@ public class hamNeighboor {
 		return this.lVoisinage;
 	}
 	
-	/*
-	 * 
-	 */
 	public Hamilton hillClim() {
 		
 		hamNeighboor bestHam = this;
@@ -65,14 +44,15 @@ public class hamNeighboor {
 			}
 		}
 		
+		
 		if(found) {
 			bestHam = null;
-			bestHam = new hamNeighboor(best);
-			//System.out.println("test");
+			bestHam = new hamNeighboor(best); //Si on trouve, on relance hill climbing sur le nouveau
+			//Utilisé un booléen pour ne pas générer des voisins inutiles
 			return bestHam.hillClim();
 		}
 		
-		return bestHam.state;
+		return bestHam.state; //Sinon on return le courant 
 	}
 	
 }
