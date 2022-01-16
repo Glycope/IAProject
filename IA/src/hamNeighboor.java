@@ -50,6 +50,9 @@ public class hamNeighboor {
 		return this.lVoisinage;
 	}
 	
+	/*
+	 * 
+	 */
 	public Hamilton hillClim() {
 		
 		hamNeighboor bestHam = this;
